@@ -32,19 +32,35 @@ $$
 
 Equivalent 한 semantic을 가지는 $\mathcal{P}^x$ 에 대해서는 revised prediction $a$ 와의 차이를 minimize 하는 것이 Equivalence accuracy 를 높이는 것이고 , 밑의 제약 조건은 Retain accuracy를 위해 constrain을 거는 것임을 알 수 있다. \
 여기서 constraint $\mathcal{C}$ 는 KL divergence로 주어진다. 
-> KL Divergence 는 두 확률 분포 p, q 의 차이를 cross-entropy 로 설명하는데 , 간략히 $H(p,q)-H(p)$ 이다. KL Divergence 는 항상 0 이상의 값을 가지며 , 거리 개념은 아니다. 
+> **KL Divergence**   
+>  : 두 확률 분포 p, q 의 차이를 cross-entropy 로 설명하는데 , 간략히 $H(p,q)-H(p)$ 이다. KL Divergence 는 항상 0 이상의 값을 가지며 , 거리 개념은 아니다. 
 
 $$
 C_{KL}(\theta,\theta',f;\mathcal{O}^x) = \displaystyle\sum_{x'\in \mathcal{O}^x}\sum_{c\in\mathcal{Y}}p_{Y|X}(c|x',\theta)log\frac{p_{Y|X}(c|x',\theta)}{p_{Y|X}(c|x',\theta')}
 $$
 
-즉 모든 $x'\in\mathcal{O}^x$ 에 대해서 output sample space $\mathcal{Y}$ 에서 기존 확률 분포와 , modify 된 후의 확률 분포의 KL Divergence를 summation 함으로서, 최대한 비슷한 확률 분포를 가지기를 기대하는 것임을 알 수 있다. 기존의 다른 논문에서는 $\mathcal{L}^p$ norm을 constraint 로 사용하였으나 , neural model은 highly non-linear 하기에, linear 한 difference 를 표현하는 $\mathcal{L}^p$ norm 은 effective 하지 못했기에 해당 논문에서는 채용하지 않았다. 
+
+
+즉 모든 $x'\in\mathcal{O}^x$ 에 대해서 output sample space $\mathcal{Y}$ 에서 기존 확률 분포와 , modify 된 후의 확률 분포의 KL Divergence를 summation 함으로서, 최대한 비슷한 확률 분포를 가지기를 기대하는 것임을 알 수 있다. 기존의 다른 논문에서는 변경전, 후 parameter 사이의 $\mathcal{L}^p$ norm을 constraint 로 사용하였으나 , neural model은 highly non-linear 하기에, linear 한 difference 를 표현하는 $\mathcal{L}^p$ norm 은 effective 하지 못했기에 해당 논문에서는 채용하지 않았다. 
 
 ### Tractable approximations
 Non-linear한 Constrained optimization은 generally intractable 하기에 Lagrangizn-relaxation 을 사용하였다. 
 >**Lagrangian Relaxation**  
 >: loss function 에 penalty와 constraint 를 곱한 값을 더해 줌으로써 , 새로운 loss 값의 optimal한 solution 은 기존 optimal solution 의 lower bound를 형성한다. 
->$min\,c'x\;s.t\;Ax=b$ 이라 할 때, $\mathcal{L}(x,p)=c'x+p'(b-Ax)\;for\;x\geq0$ 과 같이 변형시켜 사용한다. 일단 새로은 loss function 의 optimal soultion 이 lower bound 임은 증명 되었으니, modified 된 loss 의 p에 대한 optimal solution 값을  maximize 해야 한다.
+>$min\,c'x\;s.t\;Ax=b$ 이라 할 때, $\mathcal{L}(x,p)=c'x+p(b-Ax)\;for\;x\geq0$ 과 같이 변형시켜 사용한다. 일단 새로은 loss function 의 optimal soultion 이 lower bound 임은 증명 되었으니, modified 된 loss 의 p에 대한 optimal solution 값을  maximize 해야 한다.
+
+여기서 기존의 Optimization problem 을 특정 y를 montecarlo search로 sampling 하는 식으로 approximation 할 수 있다. (Constraint 의 sigma 순서를 바꾼 후 , c를 하나만 sampling)
+
+$$
+\displaystyle\min_{\phi}\max_{\alpha}f(x,\theta)+\alpha\cdot(\mathcal{C}(y,\theta)-m) \\\ y\sim p(y)
+$$
+
+물론 seq2seq 모델에서는 
+single point $y$ 에 대해서도 KL을 다루기 어렵기에($\mathcal{Y}$ is unbounded),  beam search로 도출된 sample space 에서 computation 을 다룬다. 
+
+
+
+
 
 
 

@@ -1,0 +1,4 @@
+{
+    "pasteImage.basePath": "${ProjectRoot}",
+    "pasteImage.encodePath": "none"
+}
