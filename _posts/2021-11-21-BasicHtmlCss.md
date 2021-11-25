@@ -20,65 +20,116 @@ header .profile-image:hover {
 webdevelopment 는 **Front End Development**(Html, CSs), **Back End Development**(python , retrieving data from database server) 로 나누어짐 
 
 ---
-- Html
+- Html : HTML element reference – MDN
   - Head : contains a lot of behind the scenes information that people won't see 
     - title 
     - css와 엮어주는 링크
+        ```html
+        <link rel="stylesheet" href="resume.css">
+        ```
+
     - javascript 와 엮어주는 코드
     - meta tag 
   - Body :  contains everything you see in the browser (아래는 예시) 
     - header : company logo, name of the site, purpose of the site 와 같은 introductory information 을 담고 있음  
     - main : contain bulk of the content to share with worlds!(블로그 같으면 포스트)
-    - footer : copyright information 이나 secondary navigation 등 부가적인 기능 
+    - footer : copyright information 이나 secondary navigation 등 부가적인 기능
+    - article : self contained component in a page & should always include a heading that identifies the article  
+    - section : 구역 나누기
+    - nav : 
+    - aside : main content 가 아닌 entire site 에 관련되어 있는 경우
+    - q tag : 간단한 인용문으로서 " " 가 됨
+    - div : wrapper 
+    - blockquote
+        ```html
+        <blockquote>The life is egg - <site><a href="#">dumb</a></site></blockquote>
+        ```
+
+        <blockquote>The life is egg - <site><a href="#">dumb</a></site></blockquote>
+    - image : image attribute 는 source attribute 와 alt attribute(파일 깨졌을 때 나오는 설명) 를 반드시 포함해야 함 또한 closing tag 가 필요없음
+        ```html
+        <img src="images/me.png" alt="Drawing of Jane Smith" class="profile-image" title = "aaaa" >
+        ```
+        위의 코드는 src , alt, class 3개의 attribute 를 가지고 있음  
+    - figure : 
+        ```html
+        <figure>
+            <img src="images/me.png" alt="Drawing of Jane Smith" class="profile-image" title = "aaaa" >
+            <figcaption>dddd</figcaption>
+        </figure>
+        ```
+        
+        <figure>
+            <img src="/assets/images/VAE_1.png" alt="Drawing of Jane Smith" width="1000"
+            height = "300"
+            class="profile-image" title = "aaaa" >
+            <figcaption>캡션캡션</figcaption>
+        </figure>
+
+    - paragraph: 가독성을 위해 두 문단 사이에 space 를 주기도 함(margin) ```<p></p>``` 태그
+      
+    - Link:
+
+        ```html 
+        <p><a>next paragraph</a></p>
+        ```
+
+        <p><a>next paragraph</a></p> 위처럼 링크화 된다
+
+        ```html 
+        <p><a href="#">next paragraph</a></p>
+        ``` 
+
+        <p><a href="#">next paragraph</a></p> -> 누르면 위로 올라감 (#=#top)
+        
+        ```html
+         <p><a href="www.google.co.kr" target="_blank ">next paragraph</a></p>
+        ``` 
+        이걸 하면 현재 창 말고 다른 창에서 해당 링크를 띄워준다. 다른 탭에서 열기 ? 
+    - list
+      - ul : unordered list
+      - ol : ordered list 
+        ```html
+        <ol>
+            <li>hi
+            </li>
+            <li>I am
+            </li>
+        </ol>
+        ```
+        은 숫자 , ul 로 바꾸어 주면 $\cdot$ 이런 글머리 기호로 나옴 
+        <ol>
+            <li> hi
+            </li>
+            <li>I am
+            </li>
+        </ol>
+    - br : 
+        ```html
+        a<br>
+        b
+        ```
+        a
+        b  
+        a<br>
+        b
+    - hr : <hr> 보이는 듯이 줄 긋기임
+    - em : <em>a</em> 기울이기 
+    - strong : <strong>a</strong> 굵게 
+    - small : <small>a</small >
+    - span <-> div : span 은 inline, div 는 block 단위  둘다 no semantic
+    - id : 
+        ```html
+        <a href="#end">hyperlink</a>
+        ```
+        <a href="#end">hyperlink</a>
+    - email: 
+        ```html
+        <section><a href ="mailto:asdfsf@gmail.com subject=Hi%20There!">asdfsf@gmail.com</a><section>
+        ``` 
+        <section><a href ="mailto:asdfsf@gmail.com">asdfsf@gmail.com</a><section>
 
 - doc type(Html 밖에 있는 코드 ) : always first 
-
----
-### **Html 태그 종류**      
-- image : image attribute 는 source attribute 와 alt attribute(파일 깨졌을 때 나오는 설명) 를 반드시 포함해야 함 또한 closing tag 가 필요없음
-    ```html
-    <img src="images/me.png" alt="Drawing of Jane Smith" class="profile-image">
-    ```
-    위의 코드는 src , alt, class 3개의 attribute 를 가지고 있음  
-    
-- paragraph: 가독성을 위해 두 문단 사이에 space 를 주기도 함(margin) ```<p></p>``` 태그
-  
-- Link:
-
-    ```html 
-    <p><a>next paragraph</a></p>
-    ```
-
-    <p><a>next paragraph</a></p> 위처럼 링크화 된다
-
-    ```html 
-    <p><a href="#">next paragraph</a></p>
-    ``` 
-
-    <p><a href="#">next paragraph</a></p> -> 누르면 위로 올라감 (#=#top)
-    
-    ```html
-     <p><a href="www.google.co.kr" target="_blank ">next paragraph</a></p>
-    ``` 
-    이걸 하면 현재 창 말고 다른 창에서 해당 링크를 띄워준다. 다른 탭에서 열기 ? 
-- list
-  - ul : unordered list
-  - ol : ordered list 
-    ```html
-    <ol>
-        <li>hi
-        </li>
-        <li>I am
-        </li>
-    </ol>
-    ```
-    은 숫자 , ul 로 바꾸어 주면 $\cdot$ 이런 글머리 기호로 나옴 
-    <ol>
-        <li> hi
-        </li>
-        <li>I am
-        </li>
-    </ol>
 
 ---
 ### **CSS**
@@ -101,6 +152,8 @@ a {
 }
 ```
 이 rule 은 anchor 들을 이 color로 해라는 것 각각의 rule 들은 selector(여기서는 a, 어떤 html tag 나 class, element 를 style 할건지)  
+
+
 #### CSS Property
 - color -> ```color```
 - letter spacing -> ```letter-spacing```
@@ -128,3 +181,14 @@ a {
 ``` 
 이런식으로 하면 h2 태그 전체를 바꾸지 않고도, card-title 이름을 가진 class 의 style 만 바꿀 수 있다. (css style 사이트 css-tricks.com 추천)  
 
+---
+root relative path ? 
+
+---
+도착 장소(id)
+```html
+<section id=end></section>
+```
+<section id=end></section>
+
+<p><a href=#section7>section7</a></p>
